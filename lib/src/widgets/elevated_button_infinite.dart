@@ -5,7 +5,7 @@ import 'package:lapaz_app/src/utils/theme_colors.dart';
 
 class ElevatedButtonInfinite extends StatelessWidget {
   const ElevatedButtonInfinite(
-      {Key? key, required this.action, required this.label})
+      {Key key,  this.action,  this.label})
       : super(key: key);
 
   final void Function() action;

@@ -5,7 +5,7 @@ import 'package:lapaz_app/src/utils/theme_colors.dart';
 import 'package:lapaz_app/src/widgets/widgets.dart';
 
 class LoginPage extends StatefulWidget {
-  const LoginPage({Key? key}) : super(key: key);
+  const LoginPage({Key key}) : super(key: key);
 
   @override
   _LoginPageState createState() => _LoginPageState();
@@ -56,7 +56,7 @@ class _LoginPageState extends State<LoginPage> {
 
 class _RegisterAccountSection extends StatelessWidget {
   const _RegisterAccountSection({
-    Key? key,
+    Key key,
   }) : super(key: key);
 
   @override
@@ -84,7 +84,7 @@ class _RegisterAccountSection extends StatelessWidget {
 
 class _LogoImage extends StatelessWidget {
   const _LogoImage({
-    Key? key,
+    Key key,
   }) : super(key: key);
 
   @override
