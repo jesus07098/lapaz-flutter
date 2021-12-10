@@ -39,8 +39,7 @@ class RegisterController {
     }
 
     if (confirmPassword != password) {
-      GeneralSnackbar.show(
-          context, 'Las contraseñas no coinciden...');
+      GeneralSnackbar.show(context, 'Las contraseñas no coinciden...');
       return;
     }
 
@@ -53,16 +52,21 @@ class RegisterController {
     );
 
     ResponseApi responseApi = await usersProvider.create(user);
-    try{GeneralSnackbar.show(context, responseApi.message);}
-    catch(e){
-
+    try {
+      GeneralSnackbar.show(context, responseApi.message);
+    } catch (e) {
+      GeneralSnackbar.show(context, responseApi.message);
     }
 
-    print(email);
-    print(name);
-    print(lastname);
-    print(phone);
-    print(password);
-    print(confirmPassword);
+try{
+if (responseApi.success) {
+        Future.delayed(const Duration(seconds: 3), () {
+          Navigator.pushReplacementNamed(context, 'login');
+        });
+      }
+}catch(e){
+ GeneralSnackbar.show(context, e.toString());
+}
+   
   }
 }
