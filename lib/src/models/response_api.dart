@@ -1,7 +1,5 @@
 import 'dart:convert';
 
-import 'package:http/http.dart';
-
 ResponseApi responseApiFromJson(String str) =>
     ResponseApi.fromJson(json.decode(str));
 
@@ -22,11 +20,12 @@ class ResponseApi {
   ResponseApi.fromJson(Map<String, dynamic> json) {
     message = json["message"];
     error = json["error"];
-    success = json["succes"];
+    success = json["success"];
 
     try {
       data = json['data'];
     } catch (e) {
+      // ignore: avoid_print
       print('Exception data $e');
     }
   }
@@ -34,6 +33,7 @@ class ResponseApi {
   Map<String, dynamic> toJson() => {
         "message": message,
         "error": error,
-        "succes": success,
+        "success": success,
+        "data": data,
       };
 }

@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/scheduler.dart';
 import 'package:flutter/widgets.dart';
+import 'package:lapaz_app/src/pages/login/login_controller.dart';
 
 import 'package:lapaz_app/src/utils/theme_colors.dart';
 import 'package:lapaz_app/src/widgets/widgets.dart';
@@ -12,8 +14,15 @@ class LoginPage extends StatefulWidget {
 }
 
 class _LoginPageState extends State<LoginPage> {
-  TextEditingController emailController = TextEditingController();
-  TextEditingController passwordController = TextEditingController();
+    final LoginController _con = LoginController();
+
+  @override
+  void initState() {
+    super.initState();
+    SchedulerBinding.instance.addPostFrameCallback((timeStamp) {
+      _con.init(context);
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -30,13 +39,13 @@ class _LoginPageState extends State<LoginPage> {
                 const _LogoImage(),
                 SizedBox(height: MediaQuery.of(context).size.height * 0.06),
                 TextFieldIconPreffix(
-                  controller: emailController,
+                  controller: _con.emailController,
                   icon: Icons.email,
                   hinttext: 'Correo electrónico',
                   keyboardtype: TextInputType.emailAddress,
                 ),
                 TextFieldIconPreffix(
-                  controller: passwordController,
+                  controller: _con.passwordController,
                   isObscure: true,
                   icon: Icons.lock,
                   hinttext: 'Contraseña',
@@ -44,7 +53,7 @@ class _LoginPageState extends State<LoginPage> {
                 ),
                 ElevatedButtonInfinite(
                   label: 'Iniciar sesión',
-                  action: () {},
+                  action: _con.login,
                 ),
                 const _RegisterAccountSection()
               ],
