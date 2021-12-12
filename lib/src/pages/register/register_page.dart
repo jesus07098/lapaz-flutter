@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
@@ -21,7 +23,7 @@ class _RegisterPageState extends State<RegisterPage> {
   void initState() {
     super.initState();
     SchedulerBinding.instance.addPostFrameCallback((timeStamp) {
-      _con.init(context);
+      _con.init(context, refresh);
     });
   }
 
@@ -42,11 +44,7 @@ class _RegisterPageState extends State<RegisterPage> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
-              const CircleAvatar(
-                backgroundColor: ThemeColors.purple800,
-                radius: 60,
-                child: Icon(Icons.person, size: 70, color: ThemeColors.white),
-              ),
+              ImageUser(con: _con),
               const SizedBox(
                 height: 15,
               ),
@@ -82,10 +80,36 @@ class _RegisterPageState extends State<RegisterPage> {
                   isObscure: true,
                   hinttext: 'Confirmar contraseña',
                   icon: Icons.lock_outlined),
-              ElevatedButtonInfinite(action: _con.register, label: 'Registrarse')
+              ElevatedButtonInfinite(
+                  action: _con.isEnable?_con.register:null, label: 'Registrarse')
             ],
           ),
         ),
+      ),
+    );
+  }
+
+  void refresh() {
+    setState(() {});
+  }
+}
+
+class ImageUser extends StatelessWidget {
+  const ImageUser({
+    Key key,
+    @required RegisterController con,
+  }) : _con = con, super(key: key);
+
+  final RegisterController _con;
+
+  @override
+  Widget build(BuildContext context) {
+    return GestureDetector(
+      onTap: _con.showAlertDialog,
+      child:  CircleAvatar(
+        backgroundColor: ThemeColors.purple800,
+        radius: 60,
+        backgroundImage: _con.imageFile==null? const AssetImage('assets/img/user_profile_2.png'): FileImage(File(_con.imageFile.path)),
       ),
     );
   }

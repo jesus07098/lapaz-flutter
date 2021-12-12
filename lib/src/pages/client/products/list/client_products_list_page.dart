@@ -26,6 +26,7 @@ class _ClientProductsListPageState extends State<ClientProductsListPage> {
     return Scaffold(
       key: _con.key,
       appBar: AppBar(
+      backgroundColor: ThemeColors.purple800,
         leading: _menuDrawer(),
       ),
       drawer: _drawer(),
@@ -99,10 +100,10 @@ class _ClientProductsListPageState extends State<ClientProductsListPage> {
                   )
                 ],
               )),
-          const ListTile(
-            // onTap: _con.goToUpdatePage,
-            title: Text('Editar perfil'),
-            trailing: Icon(Icons.edit_outlined),
+           ListTile(
+            onTap: _con.goToUpdatePage,
+            title: const Text('Editar perfil'),
+            trailing: const Icon(Icons.edit_outlined),
           ),
           const ListTile(
             // onTap: _con.goToOrdersList,

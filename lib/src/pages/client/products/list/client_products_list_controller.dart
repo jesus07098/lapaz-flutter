@@ -23,4 +23,8 @@ class ClientProductsListController {
   void openDrawer() {
     key.currentState.openDrawer();
   }
+
+  void goToUpdatePage() {
+    Navigator.pushNamed(context, 'client/update');
+  }
 }

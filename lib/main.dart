@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:lapaz_app/src/pages/client/products/list/client_products_list_page.dart';
+import 'package:lapaz_app/src/pages/client/update/client_update_page.dart';
 import 'package:lapaz_app/src/pages/delivery/orders/list/delivery_orders_list_pages.dart';
 
 import 'package:lapaz_app/src/pages/login/login_page.dart';
@@ -31,6 +32,7 @@ class _MyAppState extends State<MyApp> {
         'register': (BuildContext context) => const RegisterPage(),
         'roles': (BuildContext context) =>  const RolesPage(),
         'client/products/list': (BuildContext context) => const ClientProductsListPage(),
+        'client/update': (BuildContext context) => const ClientUpdatePage(),
         'restaurant/orders/list': (BuildContext context) => const RestaurantOrdersListPage(),
         'delivery/orders/list': (BuildContext context) => DeliveryOrdersListPage(),
       },
