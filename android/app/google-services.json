@@ -8,7 +8,7 @@
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:514065738973:android:1ebb3ca56fc35e2d61bf34",
+        "mobilesdk_app_id": "1:514065738973:android:906c8f7d9bd2a01361bf34",
         "android_client_info": {
           "package_name": "com.example.lapaz_app"
         }
@@ -19,6 +19,43 @@
           "client_type": 1,
           "android_info": {
             "package_name": "com.example.lapaz_app",
+            "certificate_hash": "0edf0fbf74bf0322cd200bea05e6be760e7f9e64"
+          }
+        },
+        {
+          "client_id": "514065738973-lvgh7drrvb5njhrvvq4itggt0uc7du32.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyABoSZKmmlGZXuWC5SJ31VoMhCDJ7ebcnE"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "514065738973-lvgh7drrvb5njhrvvq4itggt0uc7du32.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:514065738973:android:bca88cafc6ec4bdc61bf34",
+        "android_client_info": {
+          "package_name": "com.optic.flutter_delivery_udemy"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "514065738973-uq08ebdku0lsffkdivoarkitbjdnh48u.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.optic.flutter_delivery_udemy",
             "certificate_hash": "0edf0fbf74bf0322cd200bea05e6be760e7f9e64"
           }
         },

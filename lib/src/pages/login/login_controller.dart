@@ -12,7 +12,7 @@ class LoginController {
 
   UsersProvider usersProvider = UsersProvider();
 
-  SharedPref _sharedPref = new SharedPref();
+  final SharedPref _sharedPref = SharedPref();
 
   Future init(BuildContext context) async {
     this.context = context;

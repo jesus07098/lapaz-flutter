@@ -14,6 +14,8 @@ class ElevatedButtonInfinite extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
+      alignment: Alignment.center,
+      height: 50,
       margin: const EdgeInsets.symmetric(vertical: 30),
       child: ElevatedButton(
         onPressed: action,
@@ -23,7 +25,7 @@ class ElevatedButtonInfinite extends StatelessWidget {
               fontWeight: FontWeight.bold,
             )),
         style: ElevatedButton.styleFrom(
-            padding: const EdgeInsets.symmetric(horizontal: 124, vertical: 15),
+            padding: const EdgeInsets.symmetric(horizontal: 120, vertical: 15),
             primary: ThemeColors.purple800,
             shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(30))),

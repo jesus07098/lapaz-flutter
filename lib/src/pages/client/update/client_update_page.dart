@@ -12,7 +12,7 @@ class ClientUpdatePage extends StatefulWidget {
 
 class _ClientUpdatePageState extends State<ClientUpdatePage> {
 
-  ClientUpdateController _con = new ClientUpdateController();
+  final ClientUpdateController _con = ClientUpdateController();
 
   @override
   void initState() {

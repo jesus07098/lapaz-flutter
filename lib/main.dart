@@ -6,8 +6,11 @@ import 'package:lapaz_app/src/pages/delivery/orders/list/delivery_orders_list_pa
 import 'package:lapaz_app/src/pages/login/login_page.dart';
 import 'package:lapaz_app/src/pages/register/register_page.dart';
 import 'package:lapaz_app/src/pages/restaurant/orders/list/restaurant_orders_list_page.dart';
+import 'package:lapaz_app/src/pages/restaurant/products/create/restaurant_products_create_page.dart';
 import 'package:lapaz_app/src/pages/roles/roles_page.dart';
 import 'package:lapaz_app/src/utils/theme_colors.dart';
+
+import 'src/pages/restaurant/categories/create/restaurant_categories_create_page.dart';
 
 void main() {
   runApp( const MyApp());
@@ -34,7 +37,12 @@ class _MyAppState extends State<MyApp> {
         'client/products/list': (BuildContext context) => const ClientProductsListPage(),
         'client/update': (BuildContext context) => const ClientUpdatePage(),
         'restaurant/orders/list': (BuildContext context) => const RestaurantOrdersListPage(),
+        'restaurant/categories/create': (BuildContext context) =>
+              RestaurantCategoriesCreatePage(),
+        'restaurant/products/create': (BuildContext context) =>
+              RestaurantProductsCreatePage(),
         'delivery/orders/list': (BuildContext context) => DeliveryOrdersListPage(),
+        
       },
       theme:  ThemeData(
         primaryColor: ThemeColors.purple100,

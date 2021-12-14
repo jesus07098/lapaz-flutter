@@ -121,8 +121,8 @@ class _ClientProductsListPageState extends State<ClientProductsListPage> {
           //     : Container(),
           ListTile(
             onTap: _con.logout,
-            title: Text('Cerrar sesion'),
-            trailing: Icon(Icons.power_settings_new),
+            title: const Text('Cerrar sesión'),
+            trailing: const Icon(Icons.power_settings_new),
           ),
         ],
       ),

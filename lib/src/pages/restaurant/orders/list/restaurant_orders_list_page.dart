@@ -19,7 +19,7 @@ class _RestaurantOrdersListPageState extends State<RestaurantOrdersListPage> {
   void initState() {
     super.initState();
     SchedulerBinding.instance.addPostFrameCallback((timeStamp) {
-      _con.init(context);
+      _con.init(context, refresh);
     });
   }
 
@@ -58,9 +58,9 @@ class _RestaurantOrdersListPageState extends State<RestaurantOrdersListPage> {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Text(
+                  const Text(
                     '',
-                    style: const TextStyle(
+                    style: TextStyle(
                         fontSize: 18,
                         color: Colors.white,
                         fontWeight: FontWeight.bold),
@@ -86,8 +86,8 @@ class _RestaurantOrdersListPageState extends State<RestaurantOrdersListPage> {
                   ),
                   Container(
                     height: 60,
-                    margin: EdgeInsets.only(top: 10),
-                    child: Text('Foto'),
+                    margin: const EdgeInsets.only(top: 10),
+                    child: const Text('Foto'),
                     //  FadeInImage(
                     //   image: _con.user?.image != null
                     //       ? NetworkImage(_con.user?.image)
@@ -99,17 +99,36 @@ class _RestaurantOrdersListPageState extends State<RestaurantOrdersListPage> {
                   )
                 ],
               )),
-          const ListTile(
-            title: Text('Seleccionar rol'),
-            trailing: Icon(Icons.person_outline),
+          ListTile(
+            onTap: _con.goToCategoryCreate,
+            title: const Text('Crear categoría'),
+            trailing: const Icon(Icons.list_alt),
           ),
           ListTile(
+            onTap: _con.goToProductCreate,
+            title: const Text('Crear producto'),
+            trailing: const Icon(Icons.list_alt),
+          ),
+          _con.user != null
+              ? _con.user.roles.length > 1
+                  ? ListTile(
+                      onTap: _con.goToRoles,
+                      title: Text('Seleccionar rol'),
+                      trailing: Icon(Icons.person_outline),
+                    )
+                  : Container()
+              : Container(),
+          ListTile(
             onTap: _con.logout,
-            title: Text('Cerrar sesion'),
-            trailing: Icon(Icons.power_settings_new),
+            title: const Text('Cerrar sesion'),
+            trailing: const Icon(Icons.power_settings_new),
           ),
         ],
       ),
     );
+  }
+
+  void refresh() {
+    setState(() {}); // CTRL + S
   }
 }
