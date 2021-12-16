@@ -54,7 +54,7 @@ class _RolesPageState extends State<RolesPage> {
             child: FadeInImage(
               placeholder: const NetworkImage(
                   'https://upload.wikimedia.org/wikipedia/commons/thumb/a/ac/No_image_available.svg/2048px-No_image_available.svg.png'),
-              fadeInDuration: const Duration(milliseconds: 50),
+              fadeInDuration: const Duration(milliseconds: 30),
               fit: BoxFit.contain,
               image: rol.image != null
                   ? NetworkImage(rol.image)

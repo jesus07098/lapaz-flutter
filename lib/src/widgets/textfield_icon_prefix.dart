@@ -4,7 +4,12 @@ import 'package:lapaz_app/src/utils/theme_colors.dart';
 
 class TextFieldIconPreffix extends StatelessWidget {
   const TextFieldIconPreffix(
-      {Key key, this.hinttext, this.icon, this.keyboardtype, this.isObscure, this.controller})
+      {Key key,
+      this.hinttext,
+      this.icon,
+      this.keyboardtype,
+      this.isObscure,
+      this.controller})
       : super(key: key);
 
   final String hinttext;
@@ -19,9 +24,9 @@ class TextFieldIconPreffix extends StatelessWidget {
         margin: const EdgeInsets.symmetric(vertical: 10),
         width: 350,
         child: TextFormField(
-          controller: controller,
-          obscureText: isObscure??false,
-          keyboardType: keyboardtype,
+            controller: controller,
+            obscureText: isObscure ?? false,
+            keyboardType: keyboardtype,
             decoration: InputDecoration(
                 prefixIcon: Icon(icon, color: ThemeColors.purple800),
                 contentPadding: const EdgeInsets.all(13),

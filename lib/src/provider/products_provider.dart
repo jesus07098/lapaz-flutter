@@ -12,7 +12,6 @@ import 'package:lapaz_app/src/utils/shared_pref.dart';
 import 'package:path/path.dart';
 
 class ProductsProvider {
-
   String _url = Environment.API_DELIVERY;
   String _api = '/api/products';
   BuildContext context;
@@ -39,16 +38,17 @@ class ProductsProvider {
       final data = json.decode(res.body); // CATEGORIAS
       Product product = Product.fromJsonList(data);
       return product.toList;
-    }
-    catch(e) {
+    } catch (e) {
       print('Error: $e');
       return [];
     }
   }
 
-  Future<List<Product>> getByCategoryAndProductName(String idCategory, String productName) async {
+  Future<List<Product>> getByCategoryAndProductName(
+      String idCategory, String productName) async {
     try {
-      Uri url = Uri.http(_url, '$_api/findByCategoryAndProductName/$idCategory/$productName');
+      Uri url = Uri.http(
+          _url, '$_api/findByCategoryAndProductName/$idCategory/$productName');
       Map<String, String> headers = {
         'Content-type': 'application/json',
         'Authorization': sessionUser.sessionToken
@@ -62,8 +62,7 @@ class ProductsProvider {
       final data = json.decode(res.body); // CATEGORIAS
       Product product = Product.fromJsonList(data);
       return product.toList;
-    }
-    catch(e) {
+    } catch (e) {
       print('Error: $e');
       return [];
     }
@@ -80,18 +79,15 @@ class ProductsProvider {
             'image',
             http.ByteStream(images[i].openRead().cast()),
             await images[i].length(),
-            filename: basename(images[i].path)
-        ));
+            filename: basename(images[i].path)));
       }
 
       request.fields['product'] = json.encode(product);
       final response = await request.send(); // ENVIARA LA PETICION
       return response.stream.transform(utf8.decoder);
-    }
-    catch(e) {
+    } catch (e) {
       print('Error: $e');
       return null;
     }
   }
-
 }

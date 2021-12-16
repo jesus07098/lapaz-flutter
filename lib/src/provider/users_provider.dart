@@ -2,20 +2,20 @@ import 'dart:convert';
 import 'dart:io';
 
 import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
+import 'package:http/http.dart' as http;
 import 'package:lapaz_app/src/api/environment.dart';
 import 'package:lapaz_app/src/models/response_api.dart';
-import 'package:http/http.dart' as http;
 import 'package:lapaz_app/src/models/users.dart';
 import 'package:lapaz_app/src/utils/shared_pref.dart';
 import 'package:path/path.dart';
-import 'package:fluttertoast/fluttertoast.dart';
 
 class UsersProvider {
-  final String _url = Environment.API_DELIVERY;
-  final String _api = '/api/users';
-  User sessionUser;
+  String _url = Environment.API_DELIVERY;
+  String _api = '/api/users';
 
   BuildContext context;
+  User sessionUser;
 
   Future init(BuildContext context, {User sessionUser}) {
     this.context = context;
@@ -33,13 +33,63 @@ class UsersProvider {
 
       if (res.statusCode == 401) {
         // NO AUTORIZADO
-        Fluttertoast.showToast(msg: 'Tu sesion expiró');
+        Fluttertoast.showToast(msg: 'Tu sesion expiro');
         new SharedPref().logout(context, sessionUser.id);
       }
 
       final data = json.decode(res.body);
       User user = User.fromJson(data);
       return user;
+    } catch (e) {
+      print('Error: $e');
+      return null;
+    }
+  }
+
+  Future<List<User>> getDeliveryMen() async {
+    try {
+      Uri url = Uri.http(_url, '$_api/findDeliveryMen');
+      Map<String, String> headers = {
+        'Content-type': 'application/json',
+        'Authorization': sessionUser.sessionToken
+      };
+      final res = await http.get(url, headers: headers);
+
+      if (res.statusCode == 401) {
+        // NO AUTORIZADO
+        Fluttertoast.showToast(msg: 'Tu sesion expiro');
+        new SharedPref().logout(context, sessionUser.id);
+      }
+
+      final data = json.decode(res.body);
+      User user = User.fromJsonList(data);
+      return user.toList;
+    } catch (e) {
+      print('Error: $e');
+      return null;
+    }
+  }
+
+  Future<List<String>> getAdminsNotificationTokens() async {
+    try {
+      Uri url = Uri.http(_url, '$_api/getAdminsNotificationTokens');
+      Map<String, String> headers = {
+        'Content-type': 'application/json',
+        'Authorization': sessionUser.sessionToken
+      };
+      final res = await http.get(url, headers: headers);
+
+      if (res.statusCode == 401) {
+        // NO AUTORIZADO
+        Fluttertoast.showToast(msg: 'Tu sesion expiro');
+        new SharedPref().logout(context, sessionUser.id);
+      }
+
+      final data = json.decode(res.body);
+      final tokens = List<String>.from(data);
+
+      print('TOKENS DE ADMIN ${tokens}');
+      return tokens;
     } catch (e) {
       print('Error: $e');
       return null;
@@ -66,36 +116,6 @@ class UsersProvider {
     }
   }
 
-  Future<ResponseApi> create(User user) async {
-    try {
-      Uri url = Uri.http(_url, '$_api/create');
-      String bodyParams = json.encode(user);
-      Map<String, String> headers = {'Content-type': 'application/json'};
-      final res = await http.post(url, headers: headers, body: bodyParams);
-      final data = json.decode(res.body);
-      ResponseApi responseApi = ResponseApi.fromJson(data);
-      return responseApi;
-    } catch (e) {
-      print('Error $e');
-      return null;
-    }
-  }
-
-   Future<ResponseApi> logout(String idUser) async {
-    try {
-      Uri url = Uri.http(_url, '$_api/logout');
-      String bodyParams = json.encode({'id': idUser});
-      Map<String, String> headers = {'Content-type': 'application/json'};
-      final res = await http.post(url, headers: headers, body: bodyParams);
-      final data = json.decode(res.body);
-      ResponseApi responseApi = ResponseApi.fromJson(data);
-      return responseApi;
-    } catch (e) {
-      print('Error: $e');
-      return null;
-    }
-  }
-
   Future<Stream> update(User user, File image) async {
     try {
       Uri url = Uri.http(_url, '$_api/update');
@@ -112,12 +132,61 @@ class UsersProvider {
       final response = await request.send(); // ENVIARA LA PETICION
 
       if (response.statusCode == 401) {
-        // NO AUTORIZADO
-        Fluttertoast.showToast(msg: 'Tu sesion expiró');
-        SharedPref().logout(context, sessionUser.id);
+        Fluttertoast.showToast(msg: 'Tu sesion expiro');
+        new SharedPref().logout(context, sessionUser.id);
       }
 
       return response.stream.transform(utf8.decoder);
+    } catch (e) {
+      print('Error: $e');
+      return null;
+    }
+  }
+
+  Future<ResponseApi> create(User user) async {
+    try {
+      Uri url = Uri.http(_url, '$_api/create');
+      String bodyParams = json.encode(user);
+      Map<String, String> headers = {'Content-type': 'application/json'};
+      final res = await http.post(url, headers: headers, body: bodyParams);
+      final data = json.decode(res.body);
+      ResponseApi responseApi = ResponseApi.fromJson(data);
+      return responseApi;
+    } catch (e) {
+      print('Error: $e');
+      return null;
+    }
+  }
+
+  Future<ResponseApi> updateNotificationToken(
+      String idUser, String token) async {
+    try {
+      Uri url = Uri.http(_url, '$_api/updateNotificationToken');
+      String bodyParams =
+          json.encode({'id': idUser, 'notification_token': token});
+      Map<String, String> headers = {
+        'Content-type': 'application/json',
+      };
+      final res = await http.put(url, headers: headers, body: bodyParams);
+
+      final data = json.decode(res.body);
+      ResponseApi responseApi = ResponseApi.fromJson(data);
+      return responseApi;
+    } catch (e) {
+      print('Error: $e');
+      return null;
+    }
+  }
+
+  Future<ResponseApi> logout(String idUser) async {
+    try {
+      Uri url = Uri.http(_url, '$_api/logout');
+      String bodyParams = json.encode({'id': idUser});
+      Map<String, String> headers = {'Content-type': 'application/json'};
+      final res = await http.post(url, headers: headers, body: bodyParams);
+      final data = json.decode(res.body);
+      ResponseApi responseApi = ResponseApi.fromJson(data);
+      return responseApi;
     } catch (e) {
       print('Error: $e');
       return null;
@@ -134,7 +203,7 @@ class UsersProvider {
       ResponseApi responseApi = ResponseApi.fromJson(data);
       return responseApi;
     } catch (e) {
-      print('Error $e');
+      print('Error: $e');
       return null;
     }
   }

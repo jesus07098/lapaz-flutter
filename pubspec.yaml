@@ -43,6 +43,13 @@ dev_dependencies:
   sn_progress_dialog: ^1.0.3
   fluttertoast: ^8.0.8
   flutter_masked_text: ^0.8.0
+  modal_bottom_sheet: ^2.0.0
+  carousel_slider: ^4.0.0
+  google_maps_flutter: ^2.1.1
+  geolocator: ^7.0.3
+  location: ^4.1.1
+  geocoding: ^2.0.0
+  geocoder: ^0.2.1
 
 # The following section is specific to Flutter.
 flutter:
